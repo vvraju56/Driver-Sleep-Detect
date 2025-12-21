@@ -1,0 +1,5 @@
+# Ignore the config file with sensitive credentials
+config.py
+
+# Ignore Python cache files
+__pycache__/

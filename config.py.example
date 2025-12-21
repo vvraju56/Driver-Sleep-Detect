@@ -1,0 +1,17 @@
+# Twilio credentials
+ACCOUNT_SID = 'Your Twilio Account SID'
+AUTH_TOKEN = 'Your Twilio Auth Token'
+TWILIO_NUMBER = 'Your Twilio phone number'
+TO_NUMBER = 'Recipient phone number'
+
+# Email credentials
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+EMAIL_USER = 'Your email address'
+EMAIL_PASSWORD = 'Your email password or app password'
+TO_EMAIL = 'Recipient email address'
+
+# File paths
+FACE_CASCADE_PATH = 'haarcascade_frontalface_default.xml'
+EYE_CASCADE_PATH = 'haarcascade_eye.xml'
+ALERT_SOUND_PATH = 'alert_sound.mp3'
