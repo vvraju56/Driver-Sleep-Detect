@@ -1,42 +1,57 @@
-# Driver Drowsiness Detection System
+# Understanding `config.py`
 
-This project is a real-time driver drowsiness detection system that uses a webcam to monitor the driver's eyes. If the driver's eyes remain closed for a certain period, the system triggers an alert to wake them up.
+I have analyzed the `drivdect - old.py` file as you requested. The `config.py` file has already been created based on this analysis.
 
-## Features
+The problem is not that the `config.py` file is wrong, but that the **credentials in the old file are not your real credentials**.
 
-*   **Real-time Eye Tracking:** The system uses OpenCV to detect faces and eyes in real-time from a webcam feed.
-*   **Drowsiness Detection:** The system detects drowsiness by monitoring the duration for which the driver's eyes are closed.
-*   **Multi-channel Alerts:** When drowsiness is detected, the system triggers a series of alerts:
-    *   Plays an audible alarm.
-    *   Sends an SMS notification using Twilio.
-    *   Makes a phone call using Twilio.
-    *   Sends an email notification.
+Let's compare the files:
 
-## Setup
+---
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/vvraju56/Driver-Sleep-Detect.git
-    ```
-2.  **Install the dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Create a `config.py` file:**
-    Create a `config.py` file in the project root and add your credentials for Twilio and your email account. You can use the `config.py.example` file as a template.
+### `drivdect - old.py`
 
-4.  **Provide an alert sound:**
-    Add an alert sound file named `alert_sound.mp3` to the project directory.
+This file has hardcoded values like this:
 
-5.  **Run the application:**
-    ```bash
-    python drivdect.py
-    ```
+```python
+# Twilio credentials
+account_sid = '...'
+auth_token = '...'
 
-## How it works
+# Email credentials
+email_user = '...'
+email_password = '...'
+```
 
-The script uses Haar cascade classifiers to detect faces and then eyes within the face region. It calculates the duration for which the eyes are closed. If the duration exceeds a certain threshold, it assumes that the driver is drowsy and triggers the alerts.
+When I run the script with these credentials, it fails because they are not valid.
 
-## Disclaimer
+---
 
-This is a proof-of-concept project and should not be used as a primary safety device.
+### `config.py`
+
+This file was created to hold these same values, but in a separate file for security and portability. It currently has placeholder values:
+
+```python
+# Twilio credentials
+#
+# PLEASE REPLACE THESE VALUES WITH YOUR REAL TWILIO CREDENTIALS
+#
+ACCOUNT_SID = 'Your Twilio Account SID'
+AUTH_TOKEN = 'Your Twilio Auth Token'
+
+# Email credentials
+#
+# PLEASE REPLACE THESE VALUES WITH YOUR REAL EMAIL CREDENTIALS
+#
+EMAIL_USER = 'Your email address'
+EMAIL_PASSWORD = 'Your email password or app password'
+```
+
+---
+
+## What you need to do
+
+You need to **edit the `config.py` file** and replace the placeholder text with your **real, secret credentials**. I cannot do this for you because I do not know your credentials.
+
+**Until you edit the `config.py` file with your correct credentials, the script will continue to fail.**
+
+Please let me know once you have edited the `config.py` file with your correct credentials.
