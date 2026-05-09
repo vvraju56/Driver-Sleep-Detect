@@ -39,7 +39,7 @@
             <h1>Real-Time Driver<br><span class="highlight">Drowsiness Detection</span></h1>
             <p>Advanced computer vision technology that monitors driver alertness in real-time, preventing accidents before they happen.</p>
             <div class="hero-actions">
-                <button class="btn btn-primary" id="startBtn" onclick="startDetection()">
+                <button class="btn btn-primary" id="startBtn">
                     <i class="fa-solid fa-play"></i>
                     Get Started
                 </button>
@@ -47,10 +47,6 @@
                     <i class="fa-solid fa-info-circle"></i>
                     Learn More
                 </button>
-            </div>
-            <div class="server-config" id="serverConfig">
-                <label for="serverUrl">Backend Server URL:</label>
-                <input type="text" id="serverUrl" value="https://driver-sleep-backend.onrender.com" placeholder="https://driver-sleep-backend.onrender.com">
             </div>
             <div class="hero-stats">
                 <div class="stat">
@@ -279,34 +275,28 @@
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        function getApiUrl() {
-            const serverUrl = document.getElementById('serverUrl').value.trim();
-            return serverUrl || 'http://localhost:5001';
-        }
-
+        const btn = document.getElementById('startBtn');
+        
         function startDetection() {
-            const btn = document.getElementById('startBtn');
-            const apiUrl = getApiUrl();
-            
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Starting...';
             
-            fetch(apiUrl + '/api/start-detection', { method: 'POST' })
+            fetch('/api/start-detection', { method: 'POST' })
                 .then(r => r.json())
                 .then(data => {
                     if (data.status === 'started') {
-                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Running';
+                        btn.innerHTML = '<i class="fa-solid fa-stop"></i> Stop';
                         btn.classList.add('running');
+                        btn.disabled = false;
                         document.getElementById('statusIndicator').classList.add('active');
                         document.getElementById('statusText').textContent = 'Detection Active';
                         document.getElementById('driverStatus').textContent = 'Monitoring...';
                         document.getElementById('eyeStatus').textContent = 'Awaiting detection';
-                        document.getElementById('eyeStatusItem').classList.remove('status-alert');
-                        document.getElementById('eyeStatusItem').classList.add('status-ok');
                         pollStatus();
                     } else if (data.status === 'already_running') {
-                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Already Running';
+                        btn.innerHTML = '<i class="fa-solid fa-stop"></i> Stop';
                         btn.classList.add('running');
+                        btn.disabled = false;
                         document.getElementById('statusIndicator').classList.add('active');
                         document.getElementById('statusText').textContent = 'Already Running';
                         pollStatus();
@@ -317,22 +307,18 @@
                     }
                 })
                 .catch(err => {
-                    alert('Failed to connect to server. Make sure backend is running at: ' + apiUrl);
+                    alert('Failed to connect to server. Make sure backend is running.');
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fa-solid fa-play"></i> Get Started';
                 });
         }
 
         function stopDetection() {
-            const btn = document.getElementById('startBtn');
-            const apiUrl = getApiUrl();
-            
-            fetch(apiUrl + '/api/stop-detection', { method: 'POST' })
+            fetch('/api/stop-detection', { method: 'POST' })
                 .then(r => r.json())
                 .then(data => {
                     btn.innerHTML = '<i class="fa-solid fa-play"></i> Get Started';
                     btn.classList.remove('running');
-                    btn.disabled = false;
                     document.getElementById('statusIndicator').classList.remove('active');
                     document.getElementById('statusText').textContent = 'Stopped';
                     document.getElementById('driverStatus').textContent = 'Detection stopped';
@@ -344,16 +330,12 @@
         }
 
         function pollStatus() {
-            const apiUrl = getApiUrl();
-            
-            fetch(apiUrl + '/api/status')
+            fetch('/api/status')
                 .then(r => r.json())
                 .then(data => {
                     if (!data.running) {
-                        const btn = document.getElementById('startBtn');
                         btn.innerHTML = '<i class="fa-solid fa-play"></i> Get Started';
                         btn.classList.remove('running');
-                        btn.disabled = false;
                         document.getElementById('statusIndicator').classList.remove('active');
                         document.getElementById('statusText').textContent = 'Stopped';
                     } else {
@@ -368,13 +350,8 @@
         btn.addEventListener('click', function() {
             if (this.classList.contains('running')) {
                 stopDetection();
-            }
-        });
-
-        const btn = document.getElementById('startBtn');
-        btn.addEventListener('click', function() {
-            if (this.classList.contains('running')) {
-                stopDetection();
+            } else {
+                startDetection();
             }
         });
     </script>
