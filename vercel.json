@@ -1,8 +1,5 @@
 {
-  "framework": "static",
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "routes": [
-    { "src": "/(.*)", "dest": "/frontend/$1" }
-  ]
+  "framework": "vite",
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": "vercel_frontend"
 }
