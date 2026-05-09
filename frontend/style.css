@@ -230,6 +230,44 @@ body {
     border-color: rgba(59, 130, 246, 0.3);
 }
 
+.server-config {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.server-config label {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.server-config input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.server-config input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.info-item.status-alert i {
+    color: #ef4444;
+}
+
+.info-item.status-alert span {
+    color: #ef4444;
+}
+
 .hero-stats {
     display: flex;
     gap: 2rem;

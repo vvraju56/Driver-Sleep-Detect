@@ -1,5 +1,4 @@
 {
-  "framework": "static",
-  "outputDirectory": "vercel_frontend",
-  "installCommand": "echo 'No install needed'"
+  "builds": [{ "src": "frontend/**", "use": "@vercel/static" }],
+  "routes": [{ "src": "/(.*)", "dest": "frontend/$1" }]
 }

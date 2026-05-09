@@ -9,8 +9,6 @@ app = Flask(__name__, static_folder="frontend")
 detection_running = False
 detection_process = None
 
-API_BASE_URL = os.environ.get("API_BASE_URL", "")
-
 
 @app.route("/")
 def index():
@@ -49,11 +47,7 @@ def start_detection():
         threading.Thread(target=monitor_process, daemon=True).start()
 
         return jsonify(
-            {
-                "status": "started",
-                "message": "Detection started successfully",
-                "api_base_url": API_BASE_URL,
-            }
+            {"status": "started", "message": "Detection started successfully"}
         )
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -77,16 +71,16 @@ def stop_detection():
 
 @app.route("/api/status", methods=["GET"])
 def status():
-    return jsonify({"running": detection_running, "api_base_url": API_BASE_URL})
+    return jsonify({"running": detection_running})
 
 
 if __name__ == "__main__":
-    import sys
+    import os
 
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5001
+    port = int(os.environ.get("PORT", 5001))
     print("=" * 50)
     print("DrivDect Web Interface")
     print("=" * 50)
     print(f"Open http://localhost:{port} in your browser")
     print("=" * 50)
-    app.run(debug=True, port=port)
+    app.run(debug=True, host="0.0.0.0", port=port)

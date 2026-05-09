@@ -2,5 +2,3 @@ opencv-python
 playsound==1.2.2
 twilio
 flask
-gunicorn
-python-dotenv

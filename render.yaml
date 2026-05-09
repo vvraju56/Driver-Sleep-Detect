@@ -1,25 +1,6 @@
 services:
   - type: web
-    name: drivdect-api
-    env: python
-    region: oregon
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT
-    envVars:
-      - key: PYTHON_VERSION
-        value: "3.12"
-      - key: TWILIO_ACCOUNT_SID
-        sync: false
-      - key: TWILIO_AUTH_TOKEN
-        sync: false
-      - key: TWILIO_NUMBER
-        sync: false
-      - key: TO_NUMBER
-        sync: false
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASSWORD
-        sync: false
-      - key: TO_EMAIL
-        sync: false
+    name: drivdect-frontend
+    env: static
+    buildCommand: echo "Static site - no build needed"
+    staticPublishPath: frontend
