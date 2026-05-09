@@ -1,5 +1,5 @@
 {
-  "framework": "vite",
-  "buildCommand": "echo 'No build needed'",
-  "outputDirectory": "vercel_frontend"
+  "framework": "static",
+  "outputDirectory": "vercel_frontend",
+  "installCommand": "echo 'No install needed'"
 }
