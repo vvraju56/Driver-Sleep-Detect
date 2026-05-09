@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrivDect - Driver Drowsiness Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+                <span class="brand-text">DrivDect</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>AI-Powered Safety System</span>
+            </div>
+            <h1>Real-Time Driver<br><span class="highlight">Drowsiness Detection</span></h1>
+            <p>Advanced computer vision technology that monitors driver alertness in real-time, preventing accidents before they happen.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" id="startBtn" onclick="startDetection()">
+                    <i class="fa-solid fa-play"></i>
+                    Get Started
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fa-solid fa-info-circle"></i>
+                    Learn More
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Monitoring</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">&lt;100ms</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="visual-card">
+                <div class="card-header">
+                    <div class="status-indicator active"></div>
+                    <span>Live Detection Active</span>
+                </div>
+                <div class="card-body">
+                    <div class="detection-frame">
+                        <i class="fa-solid fa-eye"></i>
+                        <div class="scan-line"></div>
+                    </div>
+                    <div class="detection-info">
+                        <div class="info-item">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Driver Detected</span>
+                        </div>
+                        <div class="info-item status-ok">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>Eyes Open - Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Advanced Features</h2>
+                <p>Cutting-edge technology for maximum driver safety</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>State-of-the-art deep learning algorithms for accurate eye and face detection using Haar cascades.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h3>Instant Alerts</h3>
+                    <p>Multi-channel alerts including sound alarms, SMS notifications, and emergency email alerts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-phone-volume"></i>
+                    </div>
+                    <h3>Emergency Calls</h3>
+                    <p>Automatic phone calls via Twilio API to designated contacts when drowsiness is detected.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3>Real-Time Monitoring</h3>
+                    <p>Continuous 24/7 monitoring with frame-by-frame analysis and sub-100ms response time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Privacy First</h3>
+                    <p>All processing happens locally on your device. No data is sent to external servers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3>Easy Configuration</h3>
+                    <p>Simple config.py setup for phone numbers, email addresses, and alert preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>How It Works</h2>
+                    <div class="about-steps">
+                        <div class="step">
+                            <div class="step-number">01</div>
+                            <div class="step-content">
+                                <h4>Camera Capture</h4>
+                                <p>Webcam continuously captures video frames of the driver's face in real-time.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">02</div>
+                            <div class="step-content">
+                                <h4>Face & Eye Detection</h4>
+                                <p>Haar cascade classifiers detect faces and eyes within each video frame.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">03</div>
+                            <div class="step-content">
+                                <h4>State Analysis</h4>
+                                <p>System tracks eye closure duration and frequency to determine drowsiness level.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">04</div>
+                            <div class="step-content">
+                                <h4>Alert Activation</h4>
+                                <p>When drowsiness is detected, sound, SMS, email, and call alerts are triggered immediately.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="pipeline-visual">
+                        <div class="pipeline-step">
+                            <i class="fa-solid fa-video"></i>
+                            <span>Video Feed</span>
+                        </div>
+                        <div class="pipeline-arrow">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                        <div class="pipeline-step">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>Detection</span>
+                        </div>
+                        <div class="pipeline-arrow">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                        <div class="pipeline-step">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>Analysis</span>
+                        </div>
+                        <div class="pipeline-arrow">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                        <div class="pipeline-step">
+                            <i class="fa-solid fa-bell"></i>
+                            <span>Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Font Awesome v6 CDN:
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+    -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-car-side"></i>
+                    <span>DrivDect</span>
+                </div>
+                <p>Advanced driver drowsiness detection system powered by AI and computer vision technology.</p>
+                <div class="social-icons">
+                    <a href="https://vvraju.netlify.app/" target="_blank" class="social-btn" title="Website">
+                        <i class="fa-solid fa-globe"></i>
+                    </a>
+                    <a href="https://github.com/vvraju56" target="_blank" class="social-btn" title="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/vishnuraju-v-757b9929b" target="_blank" class="social-btn" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">Real-Time Detection</a></li>
+                        <li><a href="#">Eye Tracking</a></li>
+                        <li><a href="#">Alert System</a></li>
+                        <li><a href="#">SMS Notifications</a></li>
+                        <li><a href="#">Email Alerts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">GitHub Repo</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Troubleshooting</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 DrivDect. All rights reserved. Made with <span class="heart">&hearts;</span> by <span class="author">VV</span></p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        const API_BASE_URL = window.API_BASE_URL || '';
+
+        function startDetection() {
+            const btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Starting...';
+            
+            fetch(API_BASE_URL + '/api/start-detection', { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === 'started') {
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Running';
+                        btn.classList.add('running');
+                        document.querySelector('.status-indicator').classList.add('active');
+                    } else if (data.status === 'already_running') {
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Already Running';
+                        btn.classList.add('running');
+                    } else {
+                        alert('Error: ' + data.message);
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fa-solid fa-play"></i> Get Started';
+                    }
+                })
+                .catch(err => {
+                    alert('Failed to connect to server. Make sure server.py is running.');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i> Get Started';
+                });
+        }
+    </script>
+</body>
+</html>

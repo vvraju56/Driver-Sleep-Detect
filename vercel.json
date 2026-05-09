@@ -1,0 +1,8 @@
+{
+  "framework": "static",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "routes": [
+    { "src": "/(.*)", "dest": "/frontend/$1" }
+  ]
+}
