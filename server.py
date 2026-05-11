@@ -12,18 +12,9 @@ def index():
     return send_from_directory("frontend", "index.html")
 
 
-@app.route("/api/<path:path>", methods=["GET", "POST"])
-def api_fallback(path):
-    return jsonify(
-        {
-            "name": "DrivDect API",
-            "endpoints": [
-                "POST /api/start-detection",
-                "POST /api/stop-detection",
-                "GET /api/status",
-            ],
-        }
-    )
+@app.route("/<path:path>")
+def serve_static(path):
+    return send_from_directory("frontend", path)
 
 
 @app.route("/api/start-detection", methods=["POST"])

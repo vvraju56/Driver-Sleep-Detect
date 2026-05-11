@@ -3,86 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrivDect</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: #1a1a2e;
-            color: #fff;
-        }
-        .container {
-            text-align: center;
-            padding: 40px;
-            background: #16213e;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        h1 { margin-bottom: 30px; color: #e94560; }
-        .status {
-            font-size: 18px;
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .status.running { background: #0f9b0f; }
-        .status.stopped { background: #333; }
-        button {
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .start { background: #0f9b0f; color: #fff; }
-        .stop { background: #e94560; color: #fff; }
-        button:hover { opacity: 0.8; }
-        button:disabled { background: #555; cursor: not-allowed; }
-    </style>
+    <title>DrivDect - Driver Sleep Detection</title>
+    <!-- Font Awesome v6 CDN:
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+    -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>DrivDect</h1>
-        <div id="status" class="status stopped">Status: Stopped</div>
-        <button id="startBtn" class="start" onclick="startDetection()">Start Detection</button>
-        <button id="stopBtn" class="stop" onclick="stopDetection()" disabled>Stop Detection</button>
+        <header>
+            <h1><i class="fa-solid fa-car-side"></i> DrivDect</h1>
+            <p>AI-powered Driver Drowsiness Detection</p>
+        </header>
+
+        <main>
+            <div class="video-container">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <div id="alert-overlay" class="alert-overlay hidden">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>DROWSINESS DETECTED!</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn" class="btn btn-start">
+                    <i class="fa-solid fa-play"></i> Start Detection
+                </button>
+                <button id="stopBtn" class="btn btn-stop" disabled>
+                    <i class="fa-solid fa-stop"></i> Stop Detection
+                </button>
+            </div>
+
+            <div id="status-bar" class="status-bar">
+                <span id="status-text">Camera: Inactive</span>
+                <span id="alert-count">Alerts: 0</span>
+            </div>
+
+            <div id="console-log" class="console-log"></div>
+        </main>
     </div>
-    <script>
-        const API = window.location.origin;
-        async function updateStatus() {
-            const res = await fetch(`${API}/api/status`);
-            const data = await res.json();
-            const el = document.getElementById('status');
-            const startBtn = document.getElementById('startBtn');
-            const stopBtn = document.getElementById('stopBtn');
-            if (data.running) {
-                el.className = 'status running';
-                el.textContent = 'Status: Running';
-                startBtn.disabled = true;
-                stopBtn.disabled = false;
-            } else {
-                el.className = 'status stopped';
-                el.textContent = 'Status: Stopped';
-                startBtn.disabled = false;
-                stopBtn.disabled = true;
-            }
-        }
-        async function startDetection() {
-            await fetch(`${API}/api/start-detection`, { method: 'POST' });
-            updateStatus();
-        }
-        async function stopDetection() {
-            await fetch(`${API}/api/stop-detection`, { method: 'POST' });
-            updateStatus();
-        }
-        updateStatus();
-        setInterval(updateStatus, 2000);
-    </script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>DrivDect</h2>
+                <p>AI-powered driver drowsiness detection system using computer vision and real-time alerts.</p>
+                <div class="social-icons">
+                    <a href="https://vvraju.netlify.app/" target="_blank" class="social-btn">
+                        <i class="fa-solid fa-globe"></i>
+                    </a>
+                    <a href="https://github.com/vvraju56" target="_blank" class="social-btn">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/vishnuraju-v-757b9929b" target="_blank" class="social-btn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Real-time Detection</a></li>
+                        <li><a href="#">Eye Tracking</a></li>
+                        <li><a href="#">SMS Alerts</a></li>
+                        <li><a href="#">Email Notifications</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">GitHub Repo</a></li>
+                        <li><a href="#">Demo Video</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Troubleshooting</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Report Bug</a></li>
+                        <li><a href="#">Contribute</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 DrivDect. All rights reserved. Made with <span class="heart">❤️</span> by <span class="author">VV</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
