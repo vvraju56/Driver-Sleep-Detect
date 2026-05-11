@@ -1,23 +1,10 @@
-from flask import Flask, send_from_directory, jsonify, request
+from flask import Flask, jsonify
 import subprocess
 import threading
 import sys
 import os
 
-app = Flask(__name__, static_folder="frontend")
-
-detection_running = False
-detection_process = None
-
-
-@app.route("/")
-def index():
-    return send_from_directory("frontend", "index.html")
-
-
-@app.route("/<path:path>")
-def serve_static(path):
-    return send_from_directory("frontend", path)
+app = Flask(__name__)
 
 
 @app.route("/api/start-detection", methods=["POST"])
@@ -40,7 +27,7 @@ def start_detection():
 
         def monitor_process():
             global detection_running, detection_process
-            detection_process.wait()
+            detection_process.wait()  # type: ignore[attr-defined]
             detection_running = False
             detection_process = None
 
@@ -75,8 +62,6 @@ def status():
 
 
 if __name__ == "__main__":
-    import os
-
     port = int(os.environ.get("PORT", 5001))
     print("=" * 50)
     print("DrivDect Web Interface")

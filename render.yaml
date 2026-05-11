@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: drivdect-frontend
-    env: static
-    buildCommand: echo "Static site - no build needed"
-    staticPublishPath: frontend
+    name: drivdect
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app
