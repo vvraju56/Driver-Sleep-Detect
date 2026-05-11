@@ -7,6 +7,20 @@ import os
 app = Flask(__name__)
 
 
+@app.route("/")
+def index():
+    return jsonify(
+        {
+            "name": "DrivDect API",
+            "endpoints": [
+                "POST /api/start-detection",
+                "POST /api/stop-detection",
+                "GET /api/status",
+            ],
+        }
+    )
+
+
 @app.route("/api/start-detection", methods=["POST"])
 def start_detection():
     global detection_running, detection_process
